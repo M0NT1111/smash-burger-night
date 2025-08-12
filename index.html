@@ -9,7 +9,7 @@
 <body>
     <header>
         <h1> <img src="Logo.png" alt="Logo" width="400" height="100"> </h1>
-        <p>Kellemes időtőltést!</p>
+        <p> Jó étvágyat kivánunk!</p>
     </header>
 
     <main class="menu">
@@ -25,7 +25,125 @@
             <span class="price">Free</span>
         </div>
 
-       
+        <div class="menu-item">
+            <h2>Köret</h2>
+            <p>Coleslow saláta, sült krumli, sült édesburgonya</p>
+            <span class="price">Free</span>
+        </div>
+
+         <div class="menu-item">
+            <h2>Frissitő</h2>
+            <p>Házi limonádé, üditő, sör</p>
+            <span class="price">Free</span>
+        </div>
+
     </main>
+<!-- Tiramisu popup -->
+<div id="tiramisupopup">
+    <span class="close-btn" onclick="closeTiramisuPopup()">✖</span>
+    <h2>🍰 Értékelj minket!</h2>
+    <p>És ajándékba kapsz egy tiramisut!</p>
+    <div id="stars">
+        ★★★★★
+    </div>
+    <p id="rating-result" style="margin-top:10px; font-weight:bold; color:#eb6b35;"></p>
+</div>
+
+<style>
+/* Popup alap stílus */
+#tiramisupopup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    background-color:  #f1ebde;
+    color: #333;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    z-index: 2000;
+    width: 80%;
+    max-width: 300px;
+    animation: popupFadeIn 0.4s ease forwards;
+    font-family: Arial, sans-serif;
+}
+
+/* Bezáró gomb */
+#tiramisupopup .close-btn {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #888;
+}
+
+/* Csillagok stílusa */
+#stars {
+    font-size: 2rem;
+    cursor: pointer;
+    color: #ccc;
+}
+
+.star-selected {
+    color: gold;
+}
+
+/* Megjelenés animáció */
+@keyframes popupFadeIn {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+</style>
+
+<script>
+// 10 másodperc után mutatja a popupot
+setTimeout(function() {
+    document.getElementById('tiramisupopup').style.display = 'block';
+}, 15000);
+
+// Bezárás funkció
+function closeTiramisuPopup() {
+    document.getElementById('tiramisupopup').style.display = 'none';
+}
+
+// Csillag értékelés logika
+const starsContainer = document.getElementById("stars");
+const resultText = document.getElementById("rating-result");
+
+if (starsContainer) {
+    let stars = starsContainer.innerText.trim().split("");
+    starsContainer.innerHTML = "";
+    stars.forEach((star, index) => {
+        let span = document.createElement("span");
+        span.innerHTML = star;
+        span.dataset.index = index + 1;
+        span.addEventListener("click", function() {
+            highlightStars(index + 1);
+            resultText.innerText = `Köszönjük az értékelést! (${index + 1} / 5 csillag)`;
+        });
+        starsContainer.appendChild(span);
+    });
+}
+
+function highlightStars(count) {
+    document.querySelectorAll("#stars span").forEach((star, idx) => {
+        if (idx < count) {
+            star.classList.add("star-selected");
+        } else {
+            star.classList.remove("star-selected");
+        }
+    });
+}
+</script>
+
 </body>
 </html>
