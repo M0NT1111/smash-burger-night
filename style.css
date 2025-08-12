@@ -18,6 +18,14 @@ h1 {
     color: #eb6b35;
 }
 
+header img{
+max-width: 100%;
+height: auto;
+display: block;
+max-height: 100px;
+margin:  0 auto;
+}
+
 p {
     margin: 5px 0 0;
     
